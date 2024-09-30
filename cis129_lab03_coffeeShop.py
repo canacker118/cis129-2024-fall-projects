@@ -37,4 +37,5 @@ print(f"{num_muffins} Muffins at ${muffin_price} each: ${muffin_total:.2f}")
 print(f"{num_scone} Scones at ${scone_price} each: ${scone_total:.2f}")
 print(f"Tax: ${tax:.2f}")
 print(f"Total: ${total:.2f}")
-
+print()
+print("Have a great day and thank you for visiting us")
