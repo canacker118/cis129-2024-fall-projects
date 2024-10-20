@@ -11,7 +11,7 @@ import math
 
 def main():
     """
-    Action: This governs the calcultion process
+    Action: This governs the calculation process
 
     Input: None
     Output: None
