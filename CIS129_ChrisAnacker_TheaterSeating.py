@@ -1,20 +1,21 @@
 '''
 Script: Theater Seating
-Action: The script is designed to sell tickets to a theater and keep track of the total sold and for the prices set, while keeping within the programed number of seats 
+Action: The script is designed to sell tickets to a theater and keep track of the total sold and for the prices set, while keeping within the programmed number of seats 
 Author: Chris Anacker
 Date: 10/30/2024
 '''
-#Section names
+
+# Section names
 SECTION_A = "A"
 SECTION_B = "B"
 SECTION_C = "C"
 
-#Ticket prices for each section
+# Ticket prices for each section
 PRICE_A = 20
 PRICE_B = 15
 PRICE_C = 10
 
-#Number of seats for each section
+# Number of seats for each section
 SEATS_A = 300
 SEATS_B = 500
 SEATS_C = 200
@@ -33,24 +34,39 @@ def displayWelcome():
     print(f"Section {SECTION_C}: ${PRICE_C} per seat, {SEATS_C} seats available.")
     print()
 
+def getInteger(msg, section):
+    '''
+    Action: Prompts the user to input a value and ensures it is an integer.
+    
+    Input: a. msg: The message prompt for the user
+           b. section: The name of the section (A, B, C)
+    Output: Prompts the user and prints an error message if the input is not a valid integer
+    Return: The integer value entered by the user
+    '''
+    # make sure the value input is of type integer otherwise an exception is thrown
+    myInteger = input(msg + " " + section + ": ")
+    try:
+        return int(myInteger)
+    except ValueError:
+        print(f'{myInteger} is not a valid integer. Please try again.')
+        return getInteger(msg, section)
+
 def getTicketsSold(section_name, max_seats):
     '''
-    Action: Prompts the user to enter the number of tickets sold for a specific section and validates the input.
+    Action: Prompts the user to enter the number of tickets sold for a specific section 
+            using the getInteger function for input validation.
     
     Input: a. Section name: Name of the section (A, B, C)
-           b. Maxseats: The maximum number of seats available in each section
-    Output: Prompts the user for input and prints an error message if input is invalid
+           b. Maxseats: The maximum number of seats available in the section
+    Output: Prompts the user for input and prints an error message if the input is invalid
     Return: The number of tickets sold
     '''
     while True:
-        try:
-            sold = int(input(f"Enter the number of tickets sold for Section {section_name}: "))
-            if 0 <= sold <= max_seats:
-                return sold
-            else:
-                print(f"Invalid input: Please enter a number between 0 and {max_seats}.")
-        except ValueError:
-            print("Invalid input. Please enter a valid number.")
+        sold = getInteger("Enter the number of tickets sold for Section", section_name)
+        if 0 <= sold <= max_seats:
+            return sold
+        else:
+            print(f"Invalid input: Please enter a number between 0 and {max_seats}.")
 
 def calculateIncome(tickets_sold, ticket_price):
     '''
@@ -68,7 +84,7 @@ def displaySubtotal(section_name, tickets_sold, income):
     Action: Displays the subtotal for a specific section
     
     Input: a. Section Name: Name of the section
-           b.Tickets sold: The number of tickets sold in the section
+           b. Tickets sold: The number of tickets sold in the section
            c. Income: The total income generated from the section
     Output: Prints the subtotal for the section.
     Return: None
